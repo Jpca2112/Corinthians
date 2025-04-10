@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kong Games - Loja de Consoles</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: white;
+        }
+        h1, h2, h3 {
+            color: #ffcc00;
+        }
+        a {
+            text-decoration: none;
+        }
+        header {
+            background: linear-gradient(to right, #ffcc00, #ff9900);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+        nav {
+            background-color: #222;
+            padding: 12px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        nav a {
+            color: #ffcc00;
+            margin: 0 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #ff9900;
+        }
+        section {
+            padding: 50px 20px;
+        }
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+            padding: 0 10%;
+        }
+        .produto {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .produto:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+        }
+        .produto img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .produto h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .produto p {
+            font-size: 1.1em;
+        }
+        .produto .preco {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        footer {
+            background-color: #222;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer p {
+            font-size: 1em;
+            margin: 10px 0;
+        }
+        footer a {
+            color: #ffcc00;
+            font-size: 1.2em;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #ff9900;
+        }
+        .cart-container {
+            margin-top: 20px;
+            text-align: center;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .cart-container h3 {
+            color: #ffcc00;
+        }
+        .cart-item {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .cart-item span {
+            margin-left: 15px;
+        }
+        .cart-item .remove {
+            color: #ff0000;
+            cursor: pointer;
+        }
+        .cart-total {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Kong Games</h1>
+        <p>A loja de consoles que vai além do jogo!</p>
+    </header>
+
+    <nav>
+        <a href="#produtos">Produtos</a>
+        <a href="#cart">Carrinho</a>
+    </nav>
+
+    <section id="produtos">
+        <h2>Produtos em Destaque</h2>
+        <div class="produtos">
+            <div class="produto" id="produto1">
+                <img src="https://via.placeholder.com/250x150.png?text=PlayStation+5" alt="PlayStation 5">
+                <h3>PlayStation 5</h3>
+                <p>Desempenho de nova geração e jogos incríveis!</p>
+                <p class="preco">R$ 4.299,00</p>
+                <button onclick="adicionarCarrinho('PlayStation 5', 4299)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="produto" id="produto2">
+                <img src="https://via.placeholder.com/250x150.png?text=Xbox+Series+X" alt="Xbox Series X">
+                <h3>Xbox Series X</h3>
+                <p>O console mais poderoso da nova geração.</p>
+                <p class="preco">R$ 4.199,00</p>
+                <button onclick="adicionarCarrinho('Xbox Series X', 4199)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="produto" id="produto3">
+                <img src="https://via.placeholder.com/250x150.png?text=Nintendo+Switch" alt="Nintendo Switch">
+                <h3>Nintendo Switch</h3>
+                <p>Jogue onde quiser, quando quiser.</p>
+                <p class="preco">R$ 2.299,00</p>
+                <button onclick="adicionarCarrinho('Nintendo Switch', 2299)">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrinho -->
+    <section id="cart" class="cart-container">
+        <h3>Seu Carrinho</h3>
+        <div id="carrinhoVazio" style="display: none;">
+            <p>O carrinho está vazio.</p>
+        </div>
+        <div id="carrinhoItens"></div>
+        <div id="totalCarrinho" class="cart-total"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Kong Games. Todos os direitos reservados.</p>
+        <div>
+            <a href="https://www.facebook.com/konggames" target="_blank">Facebook</a>
+            <a href="https://www.instagram.com/konggames" target="_blank">Instagram</a>
+            <a href="https://www.twitter.com/konggames" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <script>
+        let carrinho = [];
+
+        // Função para adicionar ao carrinho
+        function adicionarCarrinho(nome, preco) {
+            carrinho.push({ nome, preco });
+            atualizarCarrinho();
+        }
+
+        // Função para remover do carrinho
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            atualizarCarrinho();
+        }
+
+        // Função para atualizar o carrinho
+        function atualizarCarrinho() {
+            const carrinhoVazio = document.getElementById('carrinhoVazio');
+            const carrinhoItens = document.getElementById('carrinhoItens');
+            const totalCarrinho = document.getElementById('totalCarrinho');
+
+            carrinhoItens.innerHTML = '';
+            let total = 0;
+
+            if (carrinho.length === 0) {
+                carrinhoVazio.style.display = 'block';
+            } else {
+                carrinhoVazio.style.display = 'none';
+                carrinho.forEach((item, index) => {
+                    const itemCarrinho = document.createElement('div');
+                    itemCarrinho.classList.add('cart-item');
+                    itemCarrinho.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)} <span class="remove" onclick="removerItem(${index})">Remover</span>`;
+                    carrinhoItens.appendChild(itemCarrinho);
+                    total += item.preco;
+                });
+                totalCarrinho.innerHTML = `Total: R$ ${total.toFixed(2)}`;
+            }
+        }
+    </script>
+</body>
+</html>
